@@ -34,12 +34,7 @@ import java.util.Objects;
         }
        @GetMapping(value = "/home")
        public String home() {
-            return "home";
-        }
-        @PostMapping(value = "/jsonyaml",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
-        public String convertJsonToYaml(@NotNull @NotEmpty @RequestBody final String json) throws IOException {
-            final JsonNode jsonNode = objectMapper.readTree(json.replaceAll("\\t", " "));
-            return yamlMapper.writeValueAsString(jsonNode);
+            return "yaml2json";
         }
         @PostMapping(value = "/yaml2json", consumes = "application/x-www-form-urlencoded", produces = "application/json")
         public String convertYamlToJson(@NotNull  @NotEmpty  final String yaml, Model model) throws IOException, JSONException {
@@ -48,7 +43,7 @@ import java.util.Objects;
             String jsonResult = objectMapper.writeValueAsString(jsonNode);
             model.addAttribute("modelYaml",yaml);
              model.addAttribute("modelJson", JsonFormatter.format(new JSONObject(jsonResult)));
-            return "home";
+            return "yaml2json";
         }
 
 
