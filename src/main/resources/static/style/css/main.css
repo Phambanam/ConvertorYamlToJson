@@ -1,0 +1,7 @@
+.center {
+    border: 5px solid;
+    text-align: center;
+}
+.outer{text-align:center;}
+.inner{float:left;}
+.inline{float: bottom}
