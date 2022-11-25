@@ -43,22 +43,33 @@ import java.util.Objects;
             return "json2yaml";
         }
         @PostMapping(value = "/json2yaml", consumes = "application/x-www-form-urlencoded", produces = "application/json")
-        public String convertJsonToYaml(@NotNull @NotEmpty final String json, Model model) throws JsonProcessingException {
+        public String convertJsonToYaml(@NotNull @NotEmpty final String json, Model model) {
+            try {
                 final JsonNode jsonNode = objectMapper.readTree(json.replaceAll("\\t", " "));
                 String jsonResult = yamlMapper.writeValueAsString(jsonNode);
                 model.addAttribute("modelJson", json);
                 model.addAttribute("modelYaml", jsonResult);
-                return "json2yaml";
-        }
-        @PostMapping(value = "/yaml2json", consumes = "application/x-www-form-urlencoded", produces = "application/json")
-        public String convertYamlToJson(@NotNull  @NotEmpty  final String yaml, Model model) throws IOException, JSONException {
-            JsonNode jsonNode = yamlMapper.readValue(yaml, JsonNode.class);
-            System.out.println(objectMapper.writeValueAsString(jsonNode));
-            String jsonResult = objectMapper.writeValueAsString(jsonNode);
-            model.addAttribute("modelYaml",yaml);
-             model.addAttribute("modelJson", JsonFormatter.format(new JSONObject(jsonResult)));
-            return "yaml2json";
+            } catch (Exception e) {
+                model.addAttribute("modelJson", json);
+                model.addAttribute("modelYaml", "Error Format Json");
+            }
+            return "json2yaml";
         }
 
+        @PostMapping(value = "/yaml2json", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+        public String convertYamlToJson(@NotNull @NotEmpty final String yaml, Model model) throws IOException, JSONException {
+            try {
+                JsonNode jsonNode = yamlMapper.readValue(yaml, JsonNode.class);
+                String jsonResult = objectMapper.writeValueAsString(jsonNode);
+                model.addAttribute("modelYaml", yaml);
+                model.addAttribute("modelJson", JsonFormatter.format(new JSONObject(jsonResult)));
+            } catch (Exception e) {
+                model.addAttribute("modelYaml", yaml);
+                model.addAttribute("modelJson", "Error Format yaml");
+            }
+            return "yaml2json";
+
+
+        }
 
 }
