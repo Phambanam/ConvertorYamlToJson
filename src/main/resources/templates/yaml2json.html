@@ -25,6 +25,10 @@
         <div class="outer">
           <button type="submit" class="btn btn-info col-2 inner"> convert</button>
           <!-- Add hidden form field to handle update -->
+          <div class="form-check form-switch inner">
+            <label for="switch">
+              <input class="form-check-input" type="checkbox" data-role="flipswitch" id="switch" onclick="window.location='json2yaml'"></label>
+          </div>
 
         </div>
       </div>
@@ -34,7 +38,7 @@
     <textarea disabled="true"  unselectable="on" form="reformist" name="json" id="textarea" cols="35" rows="20" wrap="soft"
               th:utext="${modelJson}"></textarea>
   </div>
-
+  <button onclick="copy()">Copy Result</button>
 </div>
 
 

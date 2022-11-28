@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.phambanam</groupId>
     <artifactId>Convertor_yaml_to_json</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Convertor_yaml_to_json</name>
     <description>Convertor_yaml_to_json</description>
     <properties>
