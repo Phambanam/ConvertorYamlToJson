@@ -1,5 +1,6 @@
 package com.phambanam.convertor_yaml_to_json.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
@@ -32,9 +33,22 @@ import java.util.Objects;
             this.objectMapper = Objects.requireNonNull(objectMapper, "ObjectMapper is null");
             this.yamlMapper = Objects.requireNonNull(yamlMapper, "YAMLMapper is null");
         }
-       @GetMapping(value = "/home")
-       public String home() {
+        @GetMapping(value = "/yaml2json")
+        public String yaml2json() {
             return "yaml2json";
+        }
+
+        @GetMapping(value = "/json2yaml")
+        public String json2yaml() {
+            return "json2yaml";
+        }
+        @PostMapping(value = "/json2yaml", consumes = "application/x-www-form-urlencoded", produces = "application/json")
+        public String convertJsonToYaml(@NotNull @NotEmpty final String json, Model model) throws JsonProcessingException {
+                final JsonNode jsonNode = objectMapper.readTree(json.replaceAll("\\t", " "));
+                String jsonResult = yamlMapper.writeValueAsString(jsonNode);
+                model.addAttribute("modelJson", json);
+                model.addAttribute("modelYaml", jsonResult);
+                return "json2yaml";
         }
         @PostMapping(value = "/yaml2json", consumes = "application/x-www-form-urlencoded", produces = "application/json")
         public String convertYamlToJson(@NotNull  @NotEmpty  final String yaml, Model model) throws IOException, JSONException {

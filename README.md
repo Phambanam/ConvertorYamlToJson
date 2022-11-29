@@ -6,12 +6,13 @@
 
 ## Descreption project
 
--
-- 
+- small web project that use to convert jaml to json
+
 ## Technology:
 
 - Java
 - Spring boot
+- Thymeleaf
 
 ## License 
 - [MIT](/LICENSE)
