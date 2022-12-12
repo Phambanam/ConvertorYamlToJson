@@ -46,3 +46,6 @@ you can use button copy to take result
    ![result](/src/main/resources/static/image/4.png)
 ## License
 - [MIT](/LICENSE)
+## Testing
+- main [![Tests](https://github.com/Phambanam/ConvertorYamlToJson/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/Phambanam/ConvertorYamlToJson/actions/workflows/maven.yml)
+- develop [![Tests](https://github.com/Phambanam/ConvertorYamlToJson/actions/workflows/maven.yml/badge.svg?branch=develop)](https://github.com/Phambanam/ConvertorYamlToJson/actions/workflows/maven.yml)
